@@ -39,21 +39,14 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import com.nokia.meego 1.2
 import "content"
 
-Rectangle {
-    width: 640; height: 240
-    color: "#646464"
-
+PageStackWindow {
     Row {
         anchors.centerIn: parent
         Clock { city: "New York"; shift: -4 }
         Clock { city: "Mumbai"; shift: 5.5 }
         Clock { city: "Tokyo"; shift: 9 }
-    }
-    QuitButton {
-        anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.margins: 10
     }
 }
