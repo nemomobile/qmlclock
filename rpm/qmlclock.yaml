@@ -1,0 +1,27 @@
+Name: qmlclock
+Summary: QML clocks application
+Version: 0.0.0
+Release: 1
+Group: Applications/System
+License: BSD
+URL: http://github.com/nemomobile/qmlclock
+Sources:
+    - "%{name}-%{version}.tar.bz2"
+Description: |
+    Clocks application written using QML
+
+PkgConfigBR:
+    - QtDeclarative
+    - QtGui
+    - qdeclarative-boostable
+
+Requires:
+    - qt-components
+    - mapplauncherd-booster-qtcomponents
+
+Configure: none
+Builder: qmake
+Files:
+    - "%{_bindir}/qmlclock"
+    - "%{_datadir}/applications/qmlclock.desktop"
+
