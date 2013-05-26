@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2013 Robin Burchell <robin+mer@viroteck.net>
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
@@ -43,7 +44,8 @@ import org.nemomobile.time 1.0
 
 Item {
     id: clock
-    width: 200; height: 200
+    width: background.width
+    height: background.height
 
     property int hours
     property int minutes
@@ -67,12 +69,15 @@ Item {
     Image { source: "clock-night.png"; visible: clock.night == true }
 
     Image {
-        x: 92.5; y: 27
+        id: hourhand
         source: "hour.png"
         smooth: true
+        x: (background.width/2) - (width/2)
+        y: ((background.height/2) - height + 16)
         transform: Rotation {
             id: hourRotation
-            origin.x: 7.5; origin.y: 73;
+            origin.x: hourhand.width/2
+            origin.y: (hourhand.height - 16)
             angle: (clock.hours * 30) + (clock.minutes * 0.5)
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
@@ -81,12 +86,15 @@ Item {
     }
 
     Image {
-        x: 93.5; y: 17
+        id: minutehand
+        x: (background.width/2) - (width/2)
+        y: ((background.height/2) - height + 14)
         source: "minute.png"
         smooth: true
         transform: Rotation {
             id: minuteRotation
-            origin.x: 6.5; origin.y: 83;
+            origin.x: minutehand.width/2
+            origin.y: (minutehand.height - 14)
             angle: clock.minutes * 6
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
@@ -95,12 +103,15 @@ Item {
     }
 
     Image {
-        x: 97.5; y: 20
+        id: secondhand
+        x: (background.width/2) - (width/2)
+        y: ((background.height/2) - height + 14)
         source: "second.png"
         smooth: true
         transform: Rotation {
             id: secondRotation
-            origin.x: 2.5; origin.y: 80;
+            origin.x: secondhand.width/2
+            origin.y: (secondhand.height - 14)
             angle: clock.seconds * 6
             Behavior on angle {
                 SpringAnimation { spring: 2; damping: 0.2; modulus: 360 }
