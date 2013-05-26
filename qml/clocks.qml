@@ -43,8 +43,9 @@ import com.nokia.meego 1.2
 import "content"
 
 PageStackWindow {
-    Clock {
-        anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
+    initialPage: Page {
+        Clock {
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
     }
 }
