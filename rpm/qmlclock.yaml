@@ -16,6 +16,7 @@ PkgConfigBR:
     - qdeclarative-boostable
 
 Requires:
+    - nemo-qml-plugin-time
     - qt-components
     - mapplauncherd-booster-qtcomponents
 

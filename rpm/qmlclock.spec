@@ -16,6 +16,7 @@ License:    BSD
 URL:        http://github.com/nemomobile/qmlclock
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  qmlclock.yaml
+Requires:   nemo-qml-plugin-time
 Requires:   qt-components
 Requires:   mapplauncherd-booster-qtcomponents
 BuildRequires:  pkgconfig(QtDeclarative)

@@ -39,34 +39,32 @@
 ****************************************************************************/
 
 import QtQuick 1.0
+import org.nemomobile.time 1.0
 
 Item {
     id: clock
-    width: 200; height: 230
+    width: 200; height: 200
 
-    property alias city: cityLabel.text
     property int hours
     property int minutes
     property int seconds 
-    property real shift
     property bool night: false
 
-    function timeChanged() {
-        var date = new Date;
-        hours = shift ? date.getUTCHours() + Math.floor(clock.shift) : date.getHours()
-        night = ( hours < 7 || hours > 19 )
-        minutes = shift ? date.getUTCMinutes() + ((clock.shift % 1) * 60) : date.getMinutes()
-        seconds = date.getUTCSeconds();
-    }
+    WallClock {
+        id: wallClock
+        enabled: true
+        updateFrequency: WallClock.Second /* TODO: change to minute when backgrounded */
 
-    Timer {
-        interval: 100; running: true; repeat: true;
-        onTriggered: clock.timeChanged()
+        onTimeChanged: {
+            hours = time.getHours()
+            night = (hours < 7 || hours > 19)
+            minutes = time.getMinutes()
+            seconds = time.getUTCSeconds();
+        }
     }
 
     Image { id: background; source: "clock.png"; visible: clock.night == false }
     Image { source: "clock-night.png"; visible: clock.night == true }
-
 
     Image {
         x: 92.5; y: 27
@@ -112,13 +110,5 @@ Item {
 
     Image {
         anchors.centerIn: background; source: "center.png"
-    }
-
-    Text {
-        id: cityLabel
-        y: 200; anchors.horizontalCenter: parent.horizontalCenter
-        color: "white"
-        font.bold: true; font.pixelSize: 14
-        style: Text.Raised; styleColor: "black"
     }
 }
