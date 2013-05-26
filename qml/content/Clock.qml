@@ -52,21 +52,28 @@ Item {
     property int seconds 
     property bool night: false
 
+    function update() {
+        var time = wallClock.time
+        hours = time.getHours()
+        night = (hours < 7 || hours > 19)
+        minutes = time.getMinutes()
+        seconds = time.getUTCSeconds();
+    }
+
+    Component.onCompleted: update()
+
     WallClock {
         id: wallClock
         enabled: true
         updateFrequency: WallClock.Second /* TODO: change to minute when backgrounded */
 
         onTimeChanged: {
-            hours = time.getHours()
-            night = (hours < 7 || hours > 19)
-            minutes = time.getMinutes()
-            seconds = time.getUTCSeconds();
+            clock.update()
         }
     }
 
-    Image { id: background; source: "clock.png"; visible: clock.night == false }
-    Image { source: "clock-night.png"; visible: clock.night == true }
+    Image { id: background; source: "clock.png"; visible: clock.night == true }
+    Image { source: "clock-night.png"; visible: clock.night == false }
 
     Image {
         id: hourhand

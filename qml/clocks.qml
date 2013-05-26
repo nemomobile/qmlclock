@@ -1,5 +1,6 @@
 /****************************************************************************
 **
+** Copyright (C) 2013 Robin Burchell <robin+mer@viroteck.net>
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
 ** Contact: http://www.qt-project.org/legal
 **
@@ -45,7 +46,11 @@ import "content"
 PageStackWindow {
     initialPage: Page {
         Clock {
+            id: clock
             anchors.horizontalCenter: parent.horizontalCenter
+            onNightChanged: {
+                theme.inverted = night
+            }
         }
     }
 }
