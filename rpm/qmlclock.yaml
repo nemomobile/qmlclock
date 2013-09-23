@@ -8,20 +8,26 @@ URL: http://github.com/nemomobile/qmlclock
 Sources:
     - "%{name}-%{version}.tar.bz2"
 Description: |
-    Clocks application written using QML
+    Clocks application written using QML. Implements UI for end user to handle alarms.
 
 PkgConfigBR:
+    - Qt5Core
     - QtDeclarative
     - QtGui
-    - qdeclarative-boostable
+    - Qt5Quick
+    - qdeclarative5-boostable
+
+PkgBR:
+    - mapplauncherd-qt5 >= 1.1.0
 
 Requires:
-    - nemo-qml-plugin-time
-    - qt-components
-    - mapplauncherd-booster-qtcomponents
+    - nemo-qml-plugin-time-qt5
+    - nemo-qml-plugin-alarms-qt5
+    - qt-components-qt5
+    - mapplauncherd-booster-qtcomponents-qt5
 
 Configure: none
-Builder: qmake
+Builder: qmake5
 Files:
     - "%{_bindir}/qmlclock"
     - "%{_datadir}/applications/qmlclock.desktop"

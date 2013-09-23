@@ -27,31 +27,23 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
+ *
+ * Edited and ported to Qt5 by Santtu Mansikkamaa, Nomovok Ltd.
+ *
  */
 
-#include <QDeclarativeView>
-#include <QDeclarativeEngine>
-#include <QApplication>
-
-#ifdef HAS_BOOSTER
+#include <QQuickView>
+#include <QQmlEngine>
+#include <QGuiApplication>
 #include <MDeclarativeCache>
-#endif
+
 
 Q_DECL_EXPORT int main(int argc, char **argv)
 {
-#ifdef HAS_BOOSTER
-    QScopedPointer<QApplication> a(MDeclarativeCache::qApplication(argc, argv));
-    QScopedPointer<QDeclarativeView> view(MDeclarativeCache::qDeclarativeView());
-#else
-    QScopedPointer<QApplication> a(new QApplication(argc, argv));
-    QScopedPointer<QDeclarativeView> view(new QDeclarativeView);
-#endif
+    QScopedPointer<QGuiApplication> a(MDeclarativeCache::qApplication(argc, argv));
+    QScopedPointer<QQuickView> view(MDeclarativeCache::qQuickView());
 
     QObject::connect(view->engine(), SIGNAL(quit()), a.data(), SLOT(quit()));
-    view->setAttribute(Qt::WA_OpaquePaintEvent);
-    view->setAttribute(Qt::WA_NoSystemBackground);
-    view->viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
-    view->viewport()->setAttribute(Qt::WA_NoSystemBackground);
 
     view->setSource(QUrl("qrc:/qml/clocks.qml"));
     view->showFullScreen();

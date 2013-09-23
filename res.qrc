@@ -1,7 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>qml/clocks.qml</file>
-        <file>qml/content/Clock.qml</file>
         <file>qml/content/center.png</file>
         <file>qml/content/background.png</file>
         <file>qml/content/minute.png</file>
@@ -9,6 +8,12 @@
         <file>qml/content/clock.png</file>
         <file>qml/content/hour.png</file>
         <file>qml/content/second.png</file>
+        <file>qml/content/DateDisplay.qml</file>
+        <file>qml/content/AlarmModel.qml</file>
+        <file>qml/content/AlarmTimePickerDialog.qml</file>
+        <file>qml/content/TumblerIndexHelper.js</file>
+        <file>qml/content/AlarmDialog.qml</file>
+        <file>qml/content/clockHelper.js</file>
+        <file>qml/content/AlarmViewRepeater.qml</file>
     </qresource>
 </RCC>
-

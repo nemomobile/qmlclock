@@ -37,20 +37,217 @@
 **
 ** $QT_END_LICENSE$
 **
+ *
+ * Edited and ported to Qt5 by Santtu Mansikkamaa, Nomovok Ltd. 2013.
+ *
 ****************************************************************************/
 
-import QtQuick 1.0
-import com.nokia.meego 1.2
+import QtQuick 2.0
+import com.nokia.meego 2.0
+import org.nemomobile.alarms 1.0
 import "content"
+import "content/clockHelper.js" as CH
+
+
+/* TODO:
+ * - Read alarms from the platform.
+ * -> Synch alarms with UI and platform and populate list of alarms from timed.
+ * - Better tying with theme.
+ */
 
 PageStackWindow {
+    id: root
+    showStatusBar: false
+
     initialPage: Page {
-        Clock {
-            id: clock
-            anchors.horizontalCenter: parent.horizontalCenter
-            onNightChanged: {
-                theme.inverted = night
+        id: pageContainer
+        property bool populated: false
+        z: 1
+
+        DateDisplay {
+            id: dateDisplay
+            z: 100
+            anchors {
+                top: parent.top
+                topMargin: 100
+                left: parent.left
+                leftMargin: 140
             }
         }
+
+        Item {
+            id: buttonContainer
+            z: dateDisplay.z + 100
+            width: root.width
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
+                bottomMargin: 30
+            }
+
+            Button {
+                id: buttonNewAlarm
+                text: alarmList.deletionEnabled ? "Cancel" : "New";
+                width: 150
+                height: 51
+                onClicked: {
+                    if (alarmList.deletionEnabled) {
+                        alarmList.deletionEnabled = false
+                        CH.clearDeletionMarkers(alarmModel);
+                    }
+                    else {
+                        CH.launchDialog(true, 0, -1, tDialog);
+                    }
+                }
+                anchors {
+                    left: parent.horizontalCenter
+                    leftMargin: 5
+                    bottom: parent.bottom
+                }
+            }
+
+            Button {
+                id: buttonDeleteAlarm
+                text: alarmList.deletionEnabled ? "Confirm" : "Delete";
+                width: 150
+                height: 51
+                onClicked: {
+                    if(!alarmList.deletionEnabled)
+                        alarmList.deletionEnabled = true;
+                    else {
+                        CH.deleteSelectedItems(alarmModel);
+                        alarmList.deletionEnabled = false;
+                    }
+                }
+                anchors {
+                    right: buttonNewAlarm.left
+                    rightMargin: 10
+                    bottom: parent.bottom
+                }
+            }
+        }
+
+        Flickable {
+            id: listViewFlickable
+            clip: true
+            contentHeight: alarmModel.count * 200
+            contentWidth: 400
+            boundsBehavior: Flickable.DragOverBounds
+            flickableDirection: Flickable.VerticalFlick
+            anchors {
+                left: parent.left
+                leftMargin: 100
+                right: parent.right
+                rightMargin: 100
+                top: dateDisplay.bottom
+                bottom: bottomStrip.top
+                bottomMargin: 5
+            }
+            Column {
+                AlarmViewRepeater {
+                    id: alarmList
+                    z: dateDisplay.z - 2
+                    onEditClicked: CH.launchDialog(false, alarmObject, index, tDialog);
+                    model: AlarmModel {
+                        id: alarmModel
+                    }
+                }
+            }
+        }
+
+        AlarmTimePickerDialog {
+            id: tDialog
+            titleText: "Alarm time:"
+            acceptButtonText: "Set"
+            rejectButtonText: "Cancel"
+            anchors.top: parent.top
+            visible: false
+            z: dateDisplay.z
+            onAccepted: {
+                if(editingAlarm){
+                    alarmModel.remove(editIndexRelay);
+                }
+                CH.callbackFunction(tDialog, alarmModel, systemAlarmModel);
+            }
+        }
+
+        AlarmsModel {
+            id: systemAlarmModel
+            onPopulatedChanged: pageContainer.populated = true
+        }
+
+        AlarmHandler {
+            id: systemAlarmHandler
+            onError: console.log(" +++Error in AlarmHandler: " + message);
+            onAlarmReady: {
+                console.log(" +++Alarm ready: " + alarm.hour + ":" + alarm.minute + " at " + alarm.title);
+                if(pageContainer.populated) {
+                    alarmDialog.alarmName = CH.parseAlarmTitle(alarm.title);
+                    alarmDialog.alarmTime = CH.twoDigits(alarm.hour) + ":" + CH.twoDigits(alarm.minute);
+                    alarmDialog.alarmObject = alarm;
+                    alarmDialog.visible = true;
+                }
+            }
+        }
+
+        AlarmDialog {
+            id: alarmDialog
+
+            onAlarmSnoozeClicked: alarmObject.snooze();
+            visible: false
+            anchors.top: parent.top
+            anchors.left: parent.left
+            width: root.width
+            height: root.height
+            z: dateDisplay.z + 40
+            onAlarmDisableClicked: {
+                CH.updateAlarmEnabledStatus(alarmObject, alarmModel);
+                alarmObject.dismiss();
+            }
+        }
+
+        /*
+         *   UI elements, purely aesthetic
+         */
+       Rectangle {
+           id: bottomStrip
+           color: "#FF292929"
+           width: parent.width
+           height: 100
+           anchors.left: parent.left
+           anchors.bottom: parent.bottom
+           z: buttonContainer.z - 10
+        }
+
+       Rectangle {
+           id: topStrip
+           color: bottomStrip.color
+           width: parent.width
+           height: 100
+           anchors.top: parent.top
+           anchors.left: parent.left
+           z: dateDisplay.z
+       }
+
+       Text {
+           text: "Alarm"
+           color: backgroundColor.color
+           font.pixelSize: 30
+           anchors.top: parent.top
+           anchors.topMargin: 30
+           anchors.horizontalCenter: topStrip.horizontalCenter
+           font.family: "Helvetica"
+           z: topStrip.z + 10
+       }
+
+       Rectangle {
+           id: backgroundColor
+           color: "#FFD6D6D6"
+           width: parent.width
+           height: parent.height
+           anchors.top: parent.top
+           anchors.left: parent.left
+           z: alarmList.z - 100
+       }
     }
 }
