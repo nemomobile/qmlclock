@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2011 Robin Burchell <robin+mer@viroteck.net>
+ * Copyright (C) 2013 Santtu Mansikkamaa <santtu.mansikkamaa@nomovok.com>
  *
  * You may use this file under the terms of the BSD license as follows:
  *
@@ -27,9 +28,6 @@
  * THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
- *
- * Edited and ported to Qt5 by Santtu Mansikkamaa, Nomovok Ltd.
- *
  */
 
 #include <QQuickView>

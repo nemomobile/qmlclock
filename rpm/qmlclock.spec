@@ -29,7 +29,7 @@ BuildRequires:  mapplauncherd-qt5 >= 1.1.0
 BuildRequires:  desktop-file-utils
 
 %description
-Clocks application written using QML. Implements UI for end user to handle alarms.
+Clocks application written using QML
 
 
 %prep

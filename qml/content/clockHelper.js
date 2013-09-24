@@ -218,20 +218,3 @@ function updateAlarmEnabledStatus(alarm, alarmModel) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,6 +2,7 @@
 **
 ** Copyright (C) 2013 Robin Burchell <robin+mer@viroteck.net>
 ** Copyright (C) 2013 Digia Plc and/or its subsidiary(-ies).
+** Copyright (C) 2013 Santtu Mansikkamaa <santtu.mansikkamaa@nomovok.com>
 ** Contact: http://www.qt-project.org/legal
 **
 ** This file is part of the examples of the Qt Toolkit.

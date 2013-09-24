@@ -8,7 +8,7 @@ URL: http://github.com/nemomobile/qmlclock
 Sources:
     - "%{name}-%{version}.tar.bz2"
 Description: |
-    Clocks application written using QML. Implements UI for end user to handle alarms.
+    Clocks application written using QML
 
 PkgConfigBR:
     - Qt5Core
