@@ -38,9 +38,6 @@
 **
 ** $QT_END_LICENSE$
 **
- *
- * Edited and ported to Qt5 by Santtu Mansikkamaa, Nomovok Ltd. 2013.
- *
 ****************************************************************************/
 
 import QtQuick 2.0

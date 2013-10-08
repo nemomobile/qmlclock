@@ -1,6 +1,7 @@
 /****************************************************************************
 **
 ** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
+** Copyright (C) 2013 Santtu Mansikkamaa <santtu.mansikkamaa@nomovok.com>
 ** All rights reserved.
 ** Contact: Nokia Corporation (qt-info@nokia.com)
 **
@@ -36,11 +37,6 @@
 ** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
 ** $QT_END_LICENSE$
 **
- *
- * Edited by Santtu Mansikkamaa, Nomovok Ltd. 2013.
- *
- *
- *
 ****************************************************************************/
 
 import QtQuick 2.0
