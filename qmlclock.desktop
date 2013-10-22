@@ -3,5 +3,5 @@ Type=Application
 Name=Clock
 Categories=Applications
 Exec=invoker --type=qtcomponents -s /usr/bin/qmlclock
-Icon=icon-l-clock
+Icon=icon-app-clock
 
