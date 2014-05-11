@@ -69,7 +69,7 @@ PageStackWindow {
                 top: parent.top
                 topMargin: 100
                 left: parent.left
-                leftMargin: 140
+                leftMargin:  40
             }
         }
 
@@ -128,15 +128,15 @@ PageStackWindow {
         Flickable {
             id: listViewFlickable
             clip: true
-            contentHeight: alarmModel.count * 200
+            contentHeight: alarmModel.count *  81
             contentWidth: 400
             boundsBehavior: Flickable.DragOverBounds
             flickableDirection: Flickable.VerticalFlick
             anchors {
                 left: parent.left
-                leftMargin: 100
+                leftMargin:  10
                 right: parent.right
-                rightMargin: 100
+                rightMargin:  10
                 top: dateDisplay.bottom
                 bottom: bottomStrip.top
                 bottomMargin: 5
@@ -230,9 +230,9 @@ PageStackWindow {
        Text {
            text: "Alarm"
            color: backgroundColor.color
-           font.pixelSize: 30
+           font.pixelSize: 40
            anchors.top: parent.top
-           anchors.topMargin: 30
+           anchors.topMargin: 10
            anchors.horizontalCenter: topStrip.horizontalCenter
            font.family: "Helvetica"
            z: topStrip.z + 10
