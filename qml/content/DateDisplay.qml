@@ -43,6 +43,7 @@ Item {
     width: 600
     height: 180
 
+    property int seconds
     property int minutes
     property int hours
     property int day
