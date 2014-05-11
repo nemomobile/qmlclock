@@ -67,7 +67,7 @@ PageStackWindow {
             z: 100
             anchors {
                 top: parent.top
-                topMargin: 100
+                topMargin: 50
                 left: parent.left
                 leftMargin:  40
             }
@@ -221,7 +221,7 @@ PageStackWindow {
            id: topStrip
            color: bottomStrip.color
            width: parent.width
-           height: 100
+           height: 50
            anchors.top: parent.top
            anchors.left: parent.left
            z: dateDisplay.z
