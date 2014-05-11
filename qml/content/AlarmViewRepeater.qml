@@ -44,7 +44,7 @@ Repeater {
 
     delegate: Rectangle {
 
-        height: 200
+        height: index == 0 : 84 ? 82
         width: 400
         color: "#FFD6D6D6"
 
@@ -102,7 +102,7 @@ Repeater {
             }
             anchors {
                 left: parent.left
-                leftMargin: 20
+                leftMargin: 10
                 verticalCenter: parent.verticalCenter
             }
         }
