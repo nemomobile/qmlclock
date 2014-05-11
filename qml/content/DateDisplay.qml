@@ -54,12 +54,13 @@ Item {
 
     function update() {
         var time = wallClock.time;
+        seconds = time.getSeconds();
         minutes = time.getMinutes();
         hours = time.getHours();
         day = time.getDate();
         month = time.getMonth() + 1;
         year = time.getFullYear();
-        dateTime = new Date(year, month-1, day, hours, minutes, "00");
+        dateTime = new Date(year, month-1, day, hours, minutes, seconds);
     }
 
     Component.onCompleted: update()
@@ -73,7 +74,7 @@ Item {
 
     Text {
         id: timeField
-        text: CH.twoDigits(hours)+":"+CH.twoDigits(minutes);
+        text: CH.twoDigits(hours)+":"+CH.twoDigits(minutes)+":"+CH.twoDigits(seconds);
         color: "#FF292929"
         font.pixelSize: 140
         font.family: "Helvetica"
@@ -86,9 +87,9 @@ Item {
         text: Qt.formatDateTime(dateTime, "ddd d. MMMM yyyy");
         color: timeField.color
         font.family: "Helvetica"
-        font.pixelSize: 30
+        font.pixelSize: 40
         anchors.left: timeField.left
-        anchors.leftMargin: 20
+        anchors.leftMargin: 10
         anchors.bottom: parent.bottom
     }
 }
