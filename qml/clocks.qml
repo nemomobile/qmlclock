@@ -128,7 +128,7 @@ PageStackWindow {
         Flickable {
             id: listViewFlickable
             clip: true
-            contentHeight: alarmModel.count *  81
+            contentHeight: alarmModel.count *  82 + 2
             contentWidth: 400
             boundsBehavior: Flickable.DragOverBounds
             flickableDirection: Flickable.VerticalFlick
