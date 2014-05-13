@@ -9,7 +9,7 @@ Name:       qmlclock
 # << macros
 
 Summary:    QML clocks application
-Version:    0.0.0
+Version:    0.0.6
 Release:    1
 Group:      Applications/System
 License:    BSD
